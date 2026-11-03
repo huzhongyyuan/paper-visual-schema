@@ -1,0 +1,4 @@
+interface:
+  display_name: "Paper Visual Schema"
+  short_description: "Paper methods to precise visual schemas and figure prompts"
+  default_prompt: "Use $paper-visual-schema to turn the supplied method into an evidence-linked visual schema and a ready-to-use renderer prompt."

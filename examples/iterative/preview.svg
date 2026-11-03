@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="1200" viewBox="0 0 2400 1200" role="img" aria-labelledby="figure-title">
+<title id="figure-title">Iterative update</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#243247"/></marker></defs>
+<rect width="2400" height="1200" fill="white"/>
+<g id="z_input"><rect x="48" y="180" width="360" height="780" rx="20" fill="#F0F2F5" stroke="#B7C2D0" stroke-width="2"/><text x="228" y="238" text-anchor="middle" fill="#243247" font-family="Helvetica,Arial,sans-serif" font-size="34" font-weight="650">Given</text></g>
+<g id="z_loop"><rect x="528" y="180" width="1440" height="780" rx="20" fill="#E5F0FB" stroke="#B7C2D0" stroke-width="2"/><text x="1248" y="238" text-anchor="middle" fill="#243247" font-family="Helvetica,Arial,sans-serif" font-size="34" font-weight="650">Iterative update</text></g>
+<g id="z_output"><rect x="2088" y="180" width="264" height="780" rx="20" fill="#DEF1E6" stroke="#B7C2D0" stroke-width="2"/><text x="2220" y="238" text-anchor="middle" fill="#243247" font-family="Helvetica,Arial,sans-serif" font-size="34" font-weight="650">Estimate</text></g>
+<g id="e_y"><path d="M360 384 H1224 V576" fill="none" stroke="#243247" stroke-width="3" marker-end="url(#arrow)"/></g>
+<g id="e_init"><path d="M360 720 H480 V660 H624" fill="none" stroke="#243247" stroke-width="3" marker-end="url(#arrow)"/></g>
+<g id="e_state"><path d="M912 660 H1080" fill="none" stroke="#243247" stroke-width="3" marker-end="url(#arrow)"/></g>
+<g id="e_update"><path d="M1368 660 H1560" fill="none" stroke="#243247" stroke-width="3" marker-end="url(#arrow)"/></g>
+<g id="e_return"><path d="M1704 744 Q1704 876 1610 876 H862 Q768 876 768 744" fill="none" stroke="#243247" stroke-width="3" marker-end="url(#arrow)"/></g>
+<g id="e_stop"><path d="M1848 660 H2112" fill="none" stroke="#243247" stroke-width="3" marker-end="url(#arrow)"/></g>
+<g id="n_y"><rect x="96" y="300" width="264" height="168" rx="13" fill="#F0F2F5" stroke="#243247" stroke-width="2.4"/>
+<rect x="188" y="323" width="22" height="17" rx="2" fill="#CCD8E6"/>
+<rect x="216" y="323" width="22" height="17" rx="2" fill="#CCD8E6"/>
+<rect x="244" y="323" width="22" height="17" rx="2" fill="#CCD8E6"/>
+<rect x="188" y="345" width="22" height="17" rx="2" fill="#CCD8E6"/>
+<rect x="216" y="345" width="22" height="17" rx="2" fill="#CCD8E6"/>
+<rect x="244" y="345" width="22" height="17" rx="2" fill="#CCD8E6"/>
+<rect x="188" y="367" width="22" height="17" rx="2" fill="#CCD8E6"/>
+<rect x="216" y="367" width="22" height="17" rx="2" fill="#CCD8E6"/>
+<rect x="244" y="367" width="22" height="17" rx="2" fill="#CCD8E6"/>
+<text x="228" y="440" text-anchor="middle" fill="#243247" font-family="Helvetica,Arial,sans-serif" font-size="29" font-weight="550">Observation y</text></g>
+<g id="n_s0"><rect x="96" y="636" width="264" height="168" rx="13" fill="#F0F2F5" stroke="#243247" stroke-width="2.4"/>
+<rect x="162" y="671" width="38" height="38" rx="4" fill="#CCDDEC" stroke="#7696B7" stroke-width="1.5"/>
+<rect x="208" y="671" width="38" height="38" rx="4" fill="#CCDDEC" stroke="#7696B7" stroke-width="1.5"/>
+<rect x="254" y="671" width="38" height="38" rx="4" fill="#CCDDEC" stroke="#7696B7" stroke-width="1.5"/>
+<text x="228" y="776" text-anchor="middle" fill="#243247" font-family="Helvetica,Arial,sans-serif" font-size="29" font-weight="550">Initial state s_0</text></g>
+<g id="n_state"><rect x="624" y="576" width="288" height="168" rx="13" fill="#E5F0FB" stroke="#243247" stroke-width="2.4"/>
+<rect x="702" y="611" width="38" height="38" rx="4" fill="#CCDDEC" stroke="#7696B7" stroke-width="1.5"/>
+<rect x="748" y="611" width="38" height="38" rx="4" fill="#CCDDEC" stroke="#7696B7" stroke-width="1.5"/>
+<rect x="794" y="611" width="38" height="38" rx="4" fill="#CCDDEC" stroke="#7696B7" stroke-width="1.5"/>
+<text x="768" y="716" text-anchor="middle" fill="#243247" font-family="Helvetica,Arial,sans-serif" font-size="29" font-weight="550">State s_t</text></g>
+<g id="n_update"><rect x="1080" y="576" width="288" height="168" rx="13" fill="#E5F0FB" stroke="#243247" stroke-width="2.4"/>
+<path d="M1159 634 H1289" stroke="#243247" stroke-width="3" fill="none"/>
+<circle cx="1159" cy="634" r="11" fill="#769FC8"/>
+<circle cx="1224" cy="634" r="11" fill="#769FC8"/>
+<circle cx="1289" cy="634" r="11" fill="#769FC8"/>
+<text x="1224" y="716" text-anchor="middle" fill="#243247" font-family="Helvetica,Arial,sans-serif" font-size="29" font-weight="550">Update block</text></g>
+<g id="n_candidate"><rect x="1560" y="576" width="288" height="168" rx="13" fill="#E5F0FB" stroke="#243247" stroke-width="2.4"/>
+<rect x="1638" y="611" width="38" height="38" rx="4" fill="#CCDDEC" stroke="#7696B7" stroke-width="1.5"/>
+<rect x="1684" y="611" width="38" height="38" rx="4" fill="#CCDDEC" stroke="#7696B7" stroke-width="1.5"/>
+<rect x="1730" y="611" width="38" height="38" rx="4" fill="#CCDDEC" stroke="#7696B7" stroke-width="1.5"/>
+<text x="1704" y="716" text-anchor="middle" fill="#243247" font-family="Helvetica,Arial,sans-serif" font-size="29" font-weight="550">State s_(t+1)</text></g>
+<g id="n_estimate"><rect x="2112" y="576" width="216" height="168" rx="13" fill="#DEF1E6" stroke="#243247" stroke-width="2.4"/>
+<rect x="2154" y="611" width="38" height="38" rx="4" fill="#CCDDEC" stroke="#7696B7" stroke-width="1.5"/>
+<rect x="2200" y="611" width="38" height="38" rx="4" fill="#CCDDEC" stroke="#7696B7" stroke-width="1.5"/>
+<rect x="2246" y="611" width="38" height="38" rx="4" fill="#CCDDEC" stroke="#7696B7" stroke-width="1.5"/>
+<text x="2220" y="716" text-anchor="middle" fill="#243247" font-family="Helvetica,Arial,sans-serif" font-size="29" font-weight="550">Final state</text></g>
+<text x="1236" y="924" text-anchor="middle" fill="#243247" font-family="Helvetica,Arial,sans-serif" font-size="28" font-weight="500">Next iteration</text>
+<text x="1980" y="620" text-anchor="middle" fill="#243247" font-family="Helvetica,Arial,sans-serif" font-size="25" font-weight="500">After K updates</text>
+</svg>

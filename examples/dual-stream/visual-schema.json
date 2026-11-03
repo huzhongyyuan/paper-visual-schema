@@ -1,0 +1,403 @@
+{
+  "schema_version": "1.0",
+  "layout": "parallel",
+  "composition": "Two horizontal RGB/depth lanes run left to right into a shared prediction path. A separate dashed loss box sits below the lanes and is used only during training.",
+  "canvas": {
+    "width": 2400,
+    "height": 1200,
+    "background": "#FFFFFF",
+    "label_mode": "render"
+  },
+  "labels": {
+    "l_inputs": "Inputs",
+    "l_encoders": "Separate encoders",
+    "l_predict": "Fusion and prediction",
+    "l_rgb": "RGB image",
+    "l_depth": "Depth image",
+    "l_re": "RGB encoder",
+    "l_de": "Depth encoder",
+    "l_rf": "RGB features",
+    "l_df": "Depth features",
+    "l_concat": "Concatenate",
+    "l_classifier": "Classifier",
+    "l_class": "Class",
+    "l_loss": "Alignment loss (train only)"
+  },
+  "sources": {
+    "s1": "An RGB image and a depth image are processed by separate encoders.",
+    "s2": "The two feature vectors are concatenated and passed to a classifier to predict a class.",
+    "s3": "During training only, an alignment loss is computed from the two feature vectors. The alignment loss is not evaluated during inference."
+  },
+  "zones": [
+    {
+      "id": "z_input",
+      "box": [
+        2,
+        12,
+        16,
+        64
+      ],
+      "shape": "rounded rectangle",
+      "visual": "Two vertically separated image glyphs.",
+      "fill": "#F0F2F5",
+      "label": "l_inputs"
+    },
+    {
+      "id": "z_encode",
+      "box": [
+        24,
+        12,
+        28,
+        64
+      ],
+      "shape": "rounded rectangle",
+      "visual": "Two independent horizontal lanes. Each contains an encoder block followed by a token strip.",
+      "fill": "#F0F2F5",
+      "label": "l_encoders"
+    },
+    {
+      "id": "z_predict",
+      "box": [
+        58,
+        12,
+        40,
+        64
+      ],
+      "shape": "rounded rectangle",
+      "visual": "A central concatenation block followed by a classifier and class tile.",
+      "fill": "#DEF1E6",
+      "label": "l_predict"
+    },
+    {
+      "id": "z_train",
+      "box": [
+        25,
+        81,
+        51,
+        17
+      ],
+      "shape": "rounded rectangle",
+      "visual": "One centered loss block, with ample room on either side for dashed incoming connectors.",
+      "fill": "#FBE6D8",
+      "label": null
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n_rgb",
+      "zone": "z_input",
+      "box": [
+        4,
+        25,
+        12,
+        16
+      ],
+      "shape": "rounded rectangle",
+      "visual": "A rectangular image glyph with three flat colored polygons; illustrative, not an experimental image.",
+      "fill": "#E5F0FB",
+      "label": "l_rgb",
+      "phase": "both",
+      "evidence": [
+        "s1"
+      ]
+    },
+    {
+      "id": "n_depth",
+      "zone": "z_input",
+      "box": [
+        4,
+        54,
+        12,
+        16
+      ],
+      "shape": "rounded rectangle",
+      "visual": "A rectangular tile divided into three flat gray bands; no depth values.",
+      "fill": "#E5F0FB",
+      "label": "l_depth",
+      "phase": "both",
+      "evidence": [
+        "s1"
+      ]
+    },
+    {
+      "id": "n_re",
+      "zone": "z_encode",
+      "box": [
+        27,
+        25,
+        11,
+        16
+      ],
+      "shape": "rounded rectangle",
+      "visual": "Three thin vertical plates followed by a wider rectangle; an encoder glyph.",
+      "fill": "#E5F0FB",
+      "label": "l_re",
+      "phase": "both",
+      "evidence": [
+        "s1"
+      ]
+    },
+    {
+      "id": "n_de",
+      "zone": "z_encode",
+      "box": [
+        27,
+        54,
+        11,
+        16
+      ],
+      "shape": "rounded rectangle",
+      "visual": "Three thin vertical plates followed by a wider rectangle; a separate encoder glyph.",
+      "fill": "#E5F0FB",
+      "label": "l_de",
+      "phase": "both",
+      "evidence": [
+        "s1"
+      ]
+    },
+    {
+      "id": "n_rf",
+      "zone": "z_encode",
+      "box": [
+        41,
+        25,
+        8,
+        16
+      ],
+      "shape": "rounded rectangle",
+      "visual": "A row of four narrow rectangular tokens. The four glyphs do not assert a tensor dimension.",
+      "fill": "#E5F0FB",
+      "label": "l_rf",
+      "phase": "both",
+      "evidence": [
+        "s1",
+        "s2"
+      ]
+    },
+    {
+      "id": "n_df",
+      "zone": "z_encode",
+      "box": [
+        41,
+        54,
+        8,
+        16
+      ],
+      "shape": "rounded rectangle",
+      "visual": "A row of four narrow rectangular tokens. The four glyphs do not assert a tensor dimension.",
+      "fill": "#E5F0FB",
+      "label": "l_df",
+      "phase": "both",
+      "evidence": [
+        "s1",
+        "s2"
+      ]
+    },
+    {
+      "id": "n_concat",
+      "zone": "z_predict",
+      "box": [
+        62,
+        39,
+        12,
+        16
+      ],
+      "shape": "rounded rectangle",
+      "visual": "Two token strips placed end to end inside the block. No plus sign.",
+      "fill": "#DEF1E6",
+      "label": "l_concat",
+      "phase": "both",
+      "evidence": [
+        "s2"
+      ]
+    },
+    {
+      "id": "n_classifier",
+      "zone": "z_predict",
+      "box": [
+        78,
+        39,
+        10,
+        16
+      ],
+      "shape": "rounded rectangle",
+      "visual": "Three small dots on the left linked to two dots on the right; a schematic classifier glyph.",
+      "fill": "#DEF1E6",
+      "label": "l_classifier",
+      "phase": "both",
+      "evidence": [
+        "s2"
+      ]
+    },
+    {
+      "id": "n_class",
+      "zone": "z_predict",
+      "box": [
+        91,
+        39,
+        5,
+        16
+      ],
+      "shape": "rounded rectangle",
+      "visual": "A small blank class tile with one dark circular marker; no scores.",
+      "fill": "#DEF1E6",
+      "label": "l_class",
+      "phase": "both",
+      "evidence": [
+        "s2"
+      ]
+    },
+    {
+      "id": "n_loss",
+      "zone": "z_train",
+      "box": [
+        39,
+        85,
+        23,
+        10
+      ],
+      "shape": "rounded rectangle",
+      "visual": "A rounded box with a dashed outline. Its label explicitly states the training-only phase.",
+      "fill": "#FBE6D8",
+      "label": "l_loss",
+      "phase": "training",
+      "evidence": [
+        "s3"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "e_rgb",
+      "source": "n_rgb",
+      "target": "n_re",
+      "kind": "data",
+      "phase": "both",
+      "stroke": "solid",
+      "route": "Horizontal arrow from the east midpoint of n_rgb to the west midpoint of n_re.",
+      "label": null,
+      "evidence": [
+        "s1"
+      ]
+    },
+    {
+      "id": "e_depth",
+      "source": "n_depth",
+      "target": "n_de",
+      "kind": "data",
+      "phase": "both",
+      "stroke": "solid",
+      "route": "Horizontal arrow from the east midpoint of n_depth to the west midpoint of n_de.",
+      "label": null,
+      "evidence": [
+        "s1"
+      ]
+    },
+    {
+      "id": "e_re",
+      "source": "n_re",
+      "target": "n_rf",
+      "kind": "data",
+      "phase": "both",
+      "stroke": "solid",
+      "route": "Short horizontal arrow from the east midpoint of n_re to the west midpoint of n_rf.",
+      "label": null,
+      "evidence": [
+        "s1",
+        "s2"
+      ]
+    },
+    {
+      "id": "e_de",
+      "source": "n_de",
+      "target": "n_df",
+      "kind": "data",
+      "phase": "both",
+      "stroke": "solid",
+      "route": "Short horizontal arrow from the east midpoint of n_de to the west midpoint of n_df.",
+      "label": null,
+      "evidence": [
+        "s1",
+        "s2"
+      ]
+    },
+    {
+      "id": "e_rf",
+      "source": "n_rf",
+      "target": "n_concat",
+      "kind": "data",
+      "phase": "both",
+      "stroke": "solid",
+      "route": "Arrow from n_rf east midpoint (49,33) to (55,33), down to (55,43), then right into the upper west side of n_concat at (62,43).",
+      "label": null,
+      "evidence": [
+        "s2"
+      ]
+    },
+    {
+      "id": "e_df",
+      "source": "n_df",
+      "target": "n_concat",
+      "kind": "data",
+      "phase": "both",
+      "stroke": "solid",
+      "route": "Arrow from n_df east midpoint (49,62) to (55,62), up to (55,51), then right into the lower west side of n_concat at (62,51).",
+      "label": null,
+      "evidence": [
+        "s2"
+      ]
+    },
+    {
+      "id": "e_concat",
+      "source": "n_concat",
+      "target": "n_classifier",
+      "kind": "data",
+      "phase": "both",
+      "stroke": "solid",
+      "route": "Horizontal arrow from n_concat east midpoint to n_classifier west midpoint.",
+      "label": null,
+      "evidence": [
+        "s2"
+      ]
+    },
+    {
+      "id": "e_class",
+      "source": "n_classifier",
+      "target": "n_class",
+      "kind": "data",
+      "phase": "both",
+      "stroke": "solid",
+      "route": "Horizontal arrow from n_classifier east midpoint to n_class west midpoint.",
+      "label": null,
+      "evidence": [
+        "s2"
+      ]
+    },
+    {
+      "id": "e_loss_rgb",
+      "source": "n_rf",
+      "target": "n_loss",
+      "kind": "loss",
+      "phase": "training",
+      "stroke": "dashed",
+      "route": "Dashed arrow from the bottom of n_rf at (43,41), left to (40,43), down along x=40 to y=79, then right to (47,79) and down into n_loss at (47,85). At the crossing with e_de at (40,62), use a small bridge and no junction dot: these paths do not connect.",
+      "label": null,
+      "evidence": [
+        "s3"
+      ]
+    },
+    {
+      "id": "e_loss_depth",
+      "source": "n_df",
+      "target": "n_loss",
+      "kind": "loss",
+      "phase": "training",
+      "stroke": "dashed",
+      "route": "Dashed arrow from the bottom midpoint of n_df at (45,70), down to (45,77), right to (54,77), then down into n_loss at (54,85).",
+      "label": null,
+      "evidence": [
+        "s3"
+      ]
+    }
+  ]
+}

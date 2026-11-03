@@ -1,0 +1,263 @@
+{
+  "schema_version": "1.0",
+  "layout": "cyclic",
+  "composition": "An observation and initial state enter a horizontal three-block update loop. A broad curved return arrow runs below the update blocks. The final estimate sits to the right.",
+  "canvas": {
+    "width": 2400,
+    "height": 1200,
+    "background": "#FFFFFF",
+    "label_mode": "render"
+  },
+  "labels": {
+    "l_inputs": "Given",
+    "l_loop": "Iterative update",
+    "l_output": "Estimate",
+    "l_y": "Observation y",
+    "l_s0": "Initial state s_0",
+    "l_state": "State s_t",
+    "l_update": "Update block",
+    "l_candidate": "State s_(t+1)",
+    "l_estimate": "Final state",
+    "l_return": "Next iteration",
+    "l_stop": "After K updates"
+  },
+  "sources": {
+    "s1": "At inference, start from the supplied initial state s_0 and a fixed observation y.",
+    "s2": "The update block consumes y and the current state s_t and produces the next state s_(t+1).",
+    "s3": "Return s_(t+1) to the state register as the current state for the next iteration. After K updates, return the last state as the estimate."
+  },
+  "zones": [
+    {
+      "id": "z_input",
+      "box": [
+        2,
+        15,
+        15,
+        65
+      ],
+      "shape": "rounded rectangle",
+      "visual": "Two vertically separated tiles containing the given observation and initial state.",
+      "fill": "#F0F2F5",
+      "label": "l_inputs"
+    },
+    {
+      "id": "z_loop",
+      "box": [
+        22,
+        15,
+        60,
+        65
+      ],
+      "shape": "rounded rectangle",
+      "visual": "Three horizontal blocks with a wide empty lower gutter reserved for the return arrow.",
+      "fill": "#E5F0FB",
+      "label": "l_loop"
+    },
+    {
+      "id": "z_output",
+      "box": [
+        87,
+        15,
+        11,
+        65
+      ],
+      "shape": "rounded rectangle",
+      "visual": "A single estimate tile.",
+      "fill": "#DEF1E6",
+      "label": "l_output"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n_y",
+      "zone": "z_input",
+      "box": [
+        4,
+        25,
+        11,
+        14
+      ],
+      "shape": "rounded rectangle",
+      "visual": "A compact fixed 3 by 3 grid; decorative cells, no asserted observation dimension.",
+      "fill": "#F0F2F5",
+      "label": "l_y",
+      "phase": "inference",
+      "evidence": [
+        "s1"
+      ]
+    },
+    {
+      "id": "n_s0",
+      "zone": "z_input",
+      "box": [
+        4,
+        53,
+        11,
+        14
+      ],
+      "shape": "rounded rectangle",
+      "visual": "Three offset horizontal sheets; an initial-state glyph.",
+      "fill": "#F0F2F5",
+      "label": "l_s0",
+      "phase": "inference",
+      "evidence": [
+        "s1"
+      ]
+    },
+    {
+      "id": "n_state",
+      "zone": "z_loop",
+      "box": [
+        26,
+        48,
+        12,
+        14
+      ],
+      "shape": "rounded rectangle",
+      "visual": "A rectangular register containing a short row of three cells.",
+      "fill": "#E5F0FB",
+      "label": "l_state",
+      "phase": "inference",
+      "evidence": [
+        "s1",
+        "s2",
+        "s3"
+      ]
+    },
+    {
+      "id": "n_update",
+      "zone": "z_loop",
+      "box": [
+        45,
+        48,
+        12,
+        14
+      ],
+      "shape": "rounded rectangle",
+      "visual": "A plain computation block with two small input ports on the top and left; no invented internal algorithm.",
+      "fill": "#E5F0FB",
+      "label": "l_update",
+      "phase": "inference",
+      "evidence": [
+        "s2"
+      ]
+    },
+    {
+      "id": "n_candidate",
+      "zone": "z_loop",
+      "box": [
+        65,
+        48,
+        12,
+        14
+      ],
+      "shape": "rounded rectangle",
+      "visual": "A rectangular state tile containing a short row of three cells.",
+      "fill": "#E5F0FB",
+      "label": "l_candidate",
+      "phase": "inference",
+      "evidence": [
+        "s2"
+      ]
+    },
+    {
+      "id": "n_estimate",
+      "zone": "z_output",
+      "box": [
+        88,
+        48,
+        9,
+        14
+      ],
+      "shape": "rounded rectangle",
+      "visual": "One state tile with the same three-cell glyph as the current-state tile.",
+      "fill": "#DEF1E6",
+      "label": "l_estimate",
+      "phase": "inference",
+      "evidence": [
+        "s3"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "e_y",
+      "source": "n_y",
+      "target": "n_update",
+      "kind": "data",
+      "phase": "inference",
+      "stroke": "solid",
+      "route": "Arrow from the east midpoint of n_y to (51,32), then down to the north midpoint of n_update at (51,48).",
+      "label": null,
+      "evidence": [
+        "s1",
+        "s2"
+      ]
+    },
+    {
+      "id": "e_init",
+      "source": "n_s0",
+      "target": "n_state",
+      "kind": "data",
+      "phase": "inference",
+      "stroke": "solid",
+      "route": "Arrow from the east midpoint of n_s0 at (15,60), right to (20,60), up to (20,55), then into the west midpoint of n_state at (26,55).",
+      "label": null,
+      "evidence": [
+        "s1"
+      ]
+    },
+    {
+      "id": "e_state",
+      "source": "n_state",
+      "target": "n_update",
+      "kind": "data",
+      "phase": "inference",
+      "stroke": "solid",
+      "route": "Horizontal arrow from the east midpoint of n_state to the west midpoint of n_update.",
+      "label": null,
+      "evidence": [
+        "s2"
+      ]
+    },
+    {
+      "id": "e_update",
+      "source": "n_update",
+      "target": "n_candidate",
+      "kind": "data",
+      "phase": "inference",
+      "stroke": "solid",
+      "route": "Horizontal arrow from the east midpoint of n_update to the west midpoint of n_candidate.",
+      "label": null,
+      "evidence": [
+        "s2"
+      ]
+    },
+    {
+      "id": "e_return",
+      "source": "n_candidate",
+      "target": "n_state",
+      "kind": "feedback",
+      "phase": "inference",
+      "stroke": "solid",
+      "route": "A broad curved arrow looping back from the south midpoint of n_candidate at (71,62), down into the empty gutter at y=73, left across the gutter, then up into the south midpoint of n_state at (32,62). This returns s_(t+1) as the next current state; place the caption below the curve.",
+      "label": "l_return",
+      "evidence": [
+        "s3"
+      ]
+    },
+    {
+      "id": "e_stop",
+      "source": "n_candidate",
+      "target": "n_estimate",
+      "kind": "control",
+      "phase": "inference",
+      "stroke": "solid",
+      "route": "Horizontal arrow from the east midpoint of n_candidate to the west midpoint of n_estimate, with its caption directly above the arrow.",
+      "label": "l_stop",
+      "evidence": [
+        "s3"
+      ]
+    }
+  ]
+}
